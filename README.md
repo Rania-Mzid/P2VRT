@@ -35,8 +35,7 @@ An example of an architecture model for the cruise control application is provid
 1. Import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
 2. Apply the chosen pattern to his/her architectural model to obtain the design model.
 
-**NOTE: **
-A new project folder named "ProjectFolderName_PatternName" will be added in the designer's workspace folder with the chosen pattern profile, and he/she needs to import it into Eclipse in order to use it in all the following steps.
+**NOTE:**A new project folder named "ProjectFolderName_PatternName" will be added in the designer's workspace folder with the chosen pattern profile, and he/she needs to import it into Eclipse in order to use it in all the following steps.
 
 ### Step 2 - Consistency check
 
