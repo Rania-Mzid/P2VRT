@@ -14,7 +14,7 @@ You must install these tools to be able to use the proposed tool:
 - Cheddar: http://beru.univ-brest.fr/cheddar/
 - SimSo: https://github.com/MaximeCheramy/simso
 
-The source code can also be found on GitHub: https://github.com/Rania-Mzid/P2VRT/tree/main/P2VRT%20Tool.
+P2VRT source code can be found in the [P2VRT Tool](https://github.com/Rania-Mzid/P2VRT/tree/main/P2VRT%20Tool) repository.
 
 ## Before Starting 
 
@@ -25,7 +25,7 @@ In the component model:
 - When Task components are dependent (access/data exchange/synchronization) a connector is created between them.
 - Each hardware resource (Processor or Network) is defined as a component in the hardware architecture component.
 
-An example of an architecture model for the cruise control application is provided in the case study repository: https://github.com/Rania-Mzid/P2VRT/tree/main/Case%20study%20and%20demos.
+An example of an architecture model for the cruise control application is provided in the [Case Study](https://github.com/Rania-Mzid/P2VRT/tree/main/Case%20study%20and%20demos) repository.
 
 
 ## Steps To Follow
