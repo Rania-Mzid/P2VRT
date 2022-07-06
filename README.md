@@ -47,21 +47,11 @@ Notes:
 2. Copy the code of the downloaded file named "transTo_Consistensy" in the created Acceleo project and run it.
 3. Run the result file named "Verif_Consistensy" of this transformation with a Java compilater to be able to answer the following question.
 
-Notes:
-The designer will find:
-- the file "transTo_Consistensy" in a folder named "trans_models" under his/her new project folder.
-- the file "Verif_Consistensy" in a folder named "src_gen" under his/her new project folder.
-
 ### Step 3 - Schedulability check
 
 1. Create a new Acceleo Project.
-2. Copy the code of the downloaded file named "transTo_NameOfChoosenTool" in the created Acceleo project and run it.
-3. Analyze the result file named "transTo_NameOfChoosenTool" of this transformation with the choosen tool to be able to answer the following question.
-
-Notes:
-The designer will find:
-- the file "transTo_NameOfChoosenTool" in a folder named "trans_models" under his/her new project folder.
-- the file "AnalyticModel_NameOfChoosenTool" in a folder named "src_gen" under his/her new project folder.
+2. Copy the code of the downloaded file named "transTo_NameOfChosenTool" in the created Acceleo project and run it.
+3. Analyze the result file named "transTo_NameOfChosenTool" of this transformation with the choosen tool to be able to answer the following question.
 
 ### Step 4 - Get a POSIX code
 
@@ -69,7 +59,8 @@ The designer will find:
 2. Copy the code of the downloaded file named "transTo_Posix" in the created Acceleo project and run it.
 3. Run the result file named "Posix_Code" of this transformation with the chosen tool to be able to answer the following question.
 
-Notes:
+### Location of the files generated in the 4 steps
+
 The designer will find:
-- the file "transTo_Posix" in a folder named "trans_models" under his/her new project folder.
-- the file "Posix_Code" in a folder named "src_gen" under his/her new project folder.
+- the "transTo_Consistensy", "transTo_NameOfChosenTool" and "transTo_Posix" files in a folder named "trans_models" under his/her new project folder.
+- the "Verif_Consistensy", "AnalyticModel_NameOfChosenTool" and "Posix_Code" files in a folder named "src_gen" under his/her new project folder.
