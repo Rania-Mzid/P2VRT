@@ -14,7 +14,7 @@ You must install these tools to be able to use the proposed tool:
 - Cheddar: http://beru.univ-brest.fr/cheddar/
 - SimSo: https://github.com/MaximeCheramy/simso
 
-The source code can also be found on GitHub: https://maximecheramy.github.io/simso-web/.
+The source code can also be found on GitHub: https://github.com/Rania-Mzid/P2VRT/tree/main/P2VRT%20Tool.
 
 ## Before Starting 
 
