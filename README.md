@@ -35,11 +35,11 @@ An example of an architecture model for the cruise control application is provid
 1. Import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
 2. Apply the chosen pattern to his/her architectural model to obtain the design model.
 
-```diff
-*Notes:*<br/>
-- *A new project folder named "ProjectFolderName_PatternName" will be added in the designer workspace folder with the profile of the chosen pattern.*<br/>
-- *The designer must import the new project folder in order to use it in all subsequent steps.*
-```
+<p style='color:#40e0d0; font-size: 100; font-style: italic;'>
+  Notes:<br/>
+  - A new project folder named "ProjectFolderName_PatternName" will be added in the designer workspace folder with the profile of the chosen pattern.*<br/>
+  - The designer must import the new project folder in order to use it in all subsequent steps.
+</p>
 
 ### Step 2 - Consistency check
 
@@ -61,5 +61,5 @@ An example of an architecture model for the cruise control application is provid
 
 ### Location of the files to be downloaded and generated
 
-- the "transTo_Consistensy", "transTo_ChosenToolName" and "transTo_Posix" files will be found in a folder named "trans_models" under his/her new project folder.
-- the "verif_Consistensy", "analysis_Model" and "Posix_Code" files will be found in a folder named "src_gen" under his/her new project folder.
+- The "transTo_Consistensy", "transTo_ChosenToolName" and "transTo_Posix" files will be found in a folder named "trans_models" under his/her new project folder.
+- The "verif_Consistensy", "analysis_Model" and "Posix_Code" files will be found in a folder named "src_gen" under his/her new project folder.
