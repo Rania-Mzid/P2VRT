@@ -30,16 +30,46 @@ An example of an architecture model for the cruise control application is provid
 
 ## Steps To Follow
 
-### Step 1
+The designer must:
 
-  1. The designer must import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
-  2. The designer must apply the chosen pattern to his/her architectural model to obtain the design model.
+### Step 1 - Get a design pattern
 
-  Notes : 
+1. Import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
+2. Apply the chosen pattern to his/her architectural model to obtain the design model.
+
+Notes: 
 - A new project folder named "NameOfTheProjectFolder_NameOfPattern" will be added in the designer workspace folder with the profile of the chosen pattern.
 - The designer must import the new project folder in order to use it in all subsequent steps.
 
-### Step 2
+### Step 2 - Consistency check
 
+1. Create a new Acceleo project.
+2. Copy the code of the downloaded file named "transTo_Consistensy" in the created Acceleo project and run it.
+3. Run the result file named "Verif_Consistensy" of this transformation with a Java compilater to be able to answer the following question.
 
+Notes:
+The designer will find:
+- the file "transTo_Consistensy" in a folder named "trans_models" under his/her new project folder.
+- the file "Verif_Consistensy" in a folder named "src_gen" under his/her new project folder.
 
+### Step 3 - Schedulability check
+
+1. Create a new Acceleo Project.
+2. Copy the code of the downloaded file named "transTo_NameOfChoosenTool" in the created Acceleo project and run it.
+3. Analyze the result file named "transTo_NameOfChoosenTool" of this transformation with the choosen tool to be able to answer the following question.
+
+Notes:
+The designer will find:
+- the file "transTo_NameOfChoosenTool" in a folder named "trans_models" under his/her new project folder.
+- the file "AnalyticModel_NameOfChoosenTool" in a folder named "src_gen" under his/her new project folder.
+
+### Step 4 - Get a POSIX code
+
+1. Create a new Acceleo Project.
+2. Copy the code of the downloaded file named "transTo_Posix" in the created Acceleo project and run it.
+3. Run the result file named "Posix_Code" of this transformation with the chosen tool to be able to answer the following question.
+
+Notes:
+The designer will find:
+- the file "transTo_Posix" in a folder named "trans_models" under his/her new project folder.
+- the file "Posix_Code" in a folder named "src_gen" under his/her new project folder.
