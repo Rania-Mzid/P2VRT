@@ -1,6 +1,6 @@
 # P2VRT - Pattern-Driven Verication Process Tool
 
-P2VRT is a guidance tool aimed at helping desigers through the verification phase of their systems in order to meet real-time requirements. Real-Time verification design patterns are the focus of this tool. Currently, [more than 25 design patterns are available](https://github.com/Rania-Mzid/P2VRT/tree/main/Patterns%20repositery).
+P2VRT is a guidance tool aimed at helping desigers through the verification phase of their systems in order to meet real-time requirements. Real-Time verification design patterns are the focus of this tool. Currently, [more than 20 design patterns are available](https://github.com/Rania-Mzid/P2VRT/tree/main/Patterns%20repositery).
 
 ## Required Tools
 
@@ -30,4 +30,16 @@ An example of an architecture model for the cruise control application is provid
 
 ## Steps To Follow
 
-1- 
+### Step 1
+
+  1. The designer must import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
+  2. The designer must apply the chosen pattern to his/her architectural model to obtain the design model.
+
+Note : 
+- A new project folder named "NameOfTheProjectFolder_NameOfPattern" will be added in the designer workspace folder with the profile of the chosen pattern.
+- The designer must import the new project folder in order to use it in all subsequent steps.
+
+### Step 2
+
+
+
