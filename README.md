@@ -7,9 +7,8 @@ P2VRT is a guidance tool aimed at helping desigers through the verification phas
 You must install these tools to be able to use the proposed tool:
 
 - Eclipse IDE: https://www.eclipse.org/downloads/
-- Papyrus: Launch Eclipse and navigate to Window -> Open Perspective -> Other, select Papyrus and press OK.
-- Acceleo: Launch Eclipse and navigate to Window -> Open Perspective -> Other, select Acceleo and press OK.
-
+- Acceleo: Open Eclipse IDE => Go to Help => Install New Software => add the following URL : http://download.eclipse.org/acceleo/updates/releases/3.7 => Select the items in the combo box => Click Finish.
+- Papyrus: Same steps as Acceleo. URL to be used : https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/2022-06.
 - Mast: https://mast.unican.es
 - Cheddar: http://beru.univ-brest.fr/cheddar/
 - SimSo: https://github.com/MaximeCheramy/simso
@@ -30,7 +29,7 @@ An example of an architecture model for the cruise control application is provid
 
 ## Steps To Follow
 
-### Step 1 - Get a design pattern
+### Step 1 - Design Pattern Selection
 
 1. Import the architecture model into the application interface, then select the model to apply by first selecting the real-time metric to be evaluated, then answering a series of questions that aim to guide him/her to the applicable patterns.
 2. Apply the chosen pattern to his/her architectural model to obtain the design model.
@@ -38,19 +37,19 @@ An example of an architecture model for the cruise control application is provid
 > **_NOTE:_**
 > A new project folder named "ProjectFolderName_PatternName" will be added in the designer's workspace folder with the chosen pattern profile, and he/she needs to import it into Eclipse in order to use it in all the following steps.
 
-### Step 2 - Consistency check
+### Step 2 - Consistency Check
 
 1. Create a new Acceleo project.
 2. Copy the code of the downloaded file named "transTo_Consistensy" in the created Acceleo project and run it.
 3. Run the result file named "verif_Consistensy" of this transformation with a Java compilater to be able to answer the following question.
 
-### Step 3 - Schedulability check
+### Step 3 - Schedulability Check
 
 1. Create a new Acceleo Project.
 2. Copy the code of the downloaded file named "transTo_ChosenToolName" in the created Acceleo project and run it.
 3. Analyze the result file named "analysis_Model" of this transformation with the choosen tool to be able to answer the following question.
 
-### Step 4 - Get a POSIX code
+### Step 4 - POSIX Code Generation
 
 1. Create a new Acceleo Project.
 2. Copy the code of the downloaded file named "transTo_Posix" in the created Acceleo project and run it.
