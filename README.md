@@ -43,7 +43,7 @@ An example of an architecture model for the cruise control application is provid
 2. Copy the code of the downloaded file named "PatternName_transToAnalysisToolName" in the "generate.mtl" file of the Acceleo project and run it.
 3. Run the result file named "PatternName_verifConsistensy" of this transformation with a Java compilater to be able to answer the following question.
 
-> **_NOTE:_**
+> **_NOTES:_**</br>
 > A folder named "gen-src" will be added in the new project folder, the designer must select this folder when generating the files with Acceleo.</br>The designer can use the same Acceleo project created in all the following steps.
 
 ### Step 3 - Schedulability Check
