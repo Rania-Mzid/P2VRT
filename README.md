@@ -40,22 +40,23 @@ An example of an architecture model for the cruise control application is provid
 ### Step 2 - Consistency Check
 
 1. Create a new Acceleo project.
-2. Copy the code of the downloaded file named "transTo_Consistensy" in the created Acceleo project and run it.
-3. Run the result file named "verif_Consistensy" of this transformation with a Java compilater to be able to answer the following question.
+2. Copy the code of the downloaded file named "PatternName_transToConsistency" in the created Acceleo project and run it.
+3. Run the result file named "PatternName_verifConsistensy" of this transformation with a Java compilater to be able to answer the following question.
+> **_NOTE:_**
+> A folder named "gen-src" will be added in the new project folder, the designer must select this folder when generating the files with Acceleo.
 
 ### Step 3 - Schedulability Check
 
 1. Create a new Acceleo Project.
-2. Copy the code of the downloaded file named "transTo_ChosenToolName" in the created Acceleo project and run it.
-3. Analyze the result file named "analysis_Model" of this transformation with the choosen tool to be able to answer the following question.
+2. Copy the code of the downloaded file named "PatternName_transToAnalysisToolName" in the created Acceleo project and run it.
+3. Analyze the result file named "PatternName_AnalysisToolName" of this transformation with the choosen tool to be able to answer the following question.
 
 ### Step 4 - POSIX Code Generation
 
 1. Create a new Acceleo Project.
-2. Copy the code of the downloaded file named "transTo_Posix" in the created Acceleo project and run it.
-3. Run the result file named "Posix_Code" of this transformation with the chosen tool to be able to answer the following question.
+2. Copy the code of the downloaded file named "PatternName_transToPosix" in the created Acceleo project and run it.
+3. Run the result file named "PatternName_Posix" of this transformation with the chosen tool to be able to answer the following question.
 
-### Location of the files to be downloaded and generated
+### Location of the files to be downloaded
 
-- The "transTo_Consistensy", "transTo_ChosenToolName" and "transTo_Posix" files will be found in a folder named "trans_models" under his/her new project folder.
-- The "verif_Consistensy", "analysis_Model" and "Posix_Code" files will be found in a folder named "src_gen" under his/her new project folder.
+- The "PatternName_transToConsistency", "PatternName_transToAnalysisToolName" and "PatternName_transToPosix" files will be found in a folder named "trans_models" under his/her new project folder.
