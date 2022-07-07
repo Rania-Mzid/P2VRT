@@ -1,0 +1,189 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[file ('FPPC_FPCT_Mast.txt',false)]
+Model (
+   Model_Name  => [m.name/]);
+[for (comp:Component | m.eContents(Component))]
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Hw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[if (str.name->includes('Network'))]
+Processing_Resource (
+   Type                          => Packet_Based_Network,
+   Name                          => [c.name/],
+   Throughput                    => [c.getValue(str,'throughput')/]);
+
+Scheduler (
+   Type            => Primary_Scheduler,
+   Name            => [c.name/],
+   Host            => [c.name/],
+   Policy          => ( Type    => FP_Packet_Based));
+[/if]
+[if (str.name->includes('Processor'))]
+
+Processing_Resource (
+   Type                   => Fixed_Priority_Processor,
+   Name                   => [c.name/]);
+[/if]
+[/for]
+[/for]
+[/if]
+
+[if (co.name->includes('Sw_Architecture'))]
+[for (c:Connector | co.eContents(Connector))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+Scheduling_Server (
+   Type                       => Regular,
+   Name                       => [c.name/]_task,
+   Server_Sched_Parameters    => 
+      ( Type         => Fixed_Priority_Policy,
+        The_Priority => [c.getValue(str,'priority')/],
+        Preassigned  => NO),
+   Scheduler                  => [c.getValue(str,'alloc')/]);
+
+Operation (
+   Type                       => Message_Transmission,
+   Name                       => [c.name/],
+   Max_Message_Size           => [c.getValue(str,'size')/]);
+
+[/for]
+[/for]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+Scheduling_Server (
+   Type                       => Regular,
+   Name                       => [c.name/]_task,
+   Server_Sched_Parameters    => 
+      ( Type         => Fixed_Priority_Policy,
+        The_Priority => [c.getValue(str,'priority')/],
+        Preassigned  => NO),
+   Scheduler                  => [c.getValue(str,'alloc')/]);
+
+Operation (
+   Type                       => Simple,
+   Name                       => [c.name/],
+   Worst_Case_Execution_Time  => [c.getValue(str,'wcet')/]);
+
+[/for]
+[/for]
+[/if]
+[if (co.name->includes('Sw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[for (p:Port | c.eContents(Port))]
+[if (p.name.startsWith('In'))]
+
+Transaction (
+   Type            => regular,
+   Name            => [c.name/]_trans,
+   External_Events => 
+      ( ( Type       => [c.getValue(str,'type').oclAsType(EnumerationLiteral).name/],
+          Name       => eIn,
+          Period     => [c.getValue(str,'period')/],
+          Max_Jitter => 0.000,
+          Phase      => 0.000)),
+   Internal_Events => 
+	  ( ( Type => Regular,
+	         Name => e[p.name.substring(4, p.name.size())/],
+	         Timing_Requirements => 
+	           ( Type     => Soft_Local_Deadline,
+	             Deadline => [c.getValue(str,'deadline')/])), 
+[/if]
+[if (p.name.size()=5 and not p.name.startsWith('In'))]
+	    ( Type => Regular,
+	         Name => e[p.name.substring(4, 5)/],
+	         Timing_Requirements => 
+	           ( Type     => Soft_Local_Deadline,
+	             Deadline => [c.getValue(str,'deadline')/])), 
+[/if]
+[if (p.name.contains('message') and not p.name.endsWith('message') and not p.name.endsWith('out'))]
+		( Type => Regular,
+          Name => e[p.name.substring(p.name.size()-1, p.name.size())/]),
+	    ( Type => Regular,
+	         Name => e[p.name.substring(1, p.name.size()-3)/],
+	         Timing_Requirements => 
+	           ( Type     => Soft_Local_Deadline,
+	             Deadline => [c.getValue(str,'deadline')/])), 
+[/if]
+[if (p.name.endsWith('out'))]
+		[if (p.name.contains('message'))]
+		( Type => Regular,
+          Name => eout1),
+		[/if]
+	    ( Type => Regular,
+          Name => eout,
+          Timing_Requirements => 
+            ( Type              => Composite,
+              Requirements_List => 
+                 ( ( Type     => Soft_Local_Deadline,
+                     Deadline => [c.getValue(str,'deadline')/]),
+                     (Type              => Hard_Global_Deadline,
+                     Deadline 	  => [c.getValue(str,'deadline')/],
+	                 Referenced_Event 	 => eIn))))),			
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[for (p:Port | c.eContents(Port))]
+   [if (p.name.startsWith('In'))]
+   Event_Handlers  => 
+	 (
+   [/if]
+   [if (p.name.size()=5 or p.name.endsWith('message'))]
+		(Type               => Activity,
+		    Input_Event        => e[p.name.substring(1, 2)/],
+			[if (p.name.size()=5)]
+		    Output_Event       => e[p.name.substring(4, 5)/],
+			[/if]
+			[if (p.name.endsWith('message'))]
+		    Output_Event       => e[p.name.substring(4, p.name.size())/],
+			[/if]
+		    Activity_Operation => [c.name/],
+		    Activity_Server    => [c.name/]_task),
+	[/if]
+	[if (p.name.contains('message') and not p.name.endsWith('message'))]
+		(Type               => Activity,
+			[if not p.name.endsWith('out')]
+		    Input_Event        => e[p.name.substring(1, p.name.size()-3)/],
+		    Output_Event       => e[p.name.substring(p.name.size()-1, p.name.size())/],
+			[/if]
+			[if p.name.endsWith('out')]
+		    Input_Event        => e[p.name.substring(1, p.name.size()-4)/],
+		    Output_Event       => eout1,
+			[/if]
+		    Activity_Operation => [c.name/],
+		    Activity_Server    => [c.name/]_task),
+	[/if]
+	[if (p.name.endsWith('out'))]
+		(Type               => Activity,
+			[if p.name.contains('message')]
+		    Input_Event        => eout1,
+		    Output_Event       => eout,
+			[/if]
+			[if not p.name.contains('message')]
+		    Input_Event        => e[p.name.substring(1, 2)/],
+		    Output_Event       => e[p.name.substring(4, 6)/],
+			[/if]
+		    Activity_Operation => [c.name/],
+		    Activity_Server    => [c.name/]_task)));
+	[/if]
+[/for]
+[/for]
+[/for]
+[/if]
+[/for]
+[/for]
+[/for]
+[/if]
+[/for]
+[/for]
+[/file]
+[/template]

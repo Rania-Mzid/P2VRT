@@ -1,0 +1,140 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[file ('RMIT_Cheddar.xml',false)]
+<?xml version="1.0" encoding="utf-8"?>
+<cheddar>
+ <core_units>
+  <core_unit id="id_core">
+   <object_type>CORE_OBJECT_TYPE</object_type>
+   <name>core</name>
+   <scheduling>
+    <scheduling_parameters>
+     <scheduler_type>POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL</scheduler_type>
+     <quantum>0</quantum>
+     <preemptive_type>PREEMPTIVE</preemptive_type>
+     <capacity>0</capacity>
+     <period>0</period>
+     <priority>0</priority>
+     <start_time>0</start_time>
+    </scheduling_parameters>
+   </scheduling>
+   <speed>1</speed>
+   <worstcase_perequest_intrabank_memory_interference>0</worstcase_perequest_intrabank_memory_interference>
+   <worstcase_perequest_interbank_memory_interference>0</worstcase_perequest_interbank_memory_interference>
+   <isa>I386</isa>
+  </core_unit>
+ </core_units>
+
+[for (comp:Component | m.eContents(Component))]
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Hw_Architecture'))]
+ <processors>
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[if (str.name->includes('Processor'))]
+  <mono_core_processor id="id_[c.name/]">
+   <object_type>PROCESSOR_OBJECT_TYPE</object_type>
+   <name>[c.name/]</name>
+   <processor_type>MONOCORE_TYPE</processor_type>
+   <migration_type>NO_MIGRATION_TYPE</migration_type>
+   <core ref="id_core">
+   </core>
+  </mono_core_processor>
+[/if]
+[/for]
+[/for]
+ </processors>
+[/if]
+[/for]
+
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Hw_Architecture'))]
+ <address_spaces>
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[if (str.name->includes('Processor'))]
+  <address_space id="id_adress_[c.name/]">
+   <object_type>ADDRESS_SPACE_OBJECT_TYPE</object_type>
+   <name>adress_[c.name/]</name>
+   <cpu_name>[c.name/]</cpu_name>
+   <text_memory_size>0</text_memory_size>
+   <stack_memory_size>0</stack_memory_size>
+   <data_memory_size>0</data_memory_size>
+   <heap_memory_size>0</heap_memory_size>
+   <scheduling>
+    <scheduling_parameters>
+     <scheduler_type>NO_SCHEDULING_PROTOCOL</scheduler_type>
+     <quantum>0</quantum>
+     <preemptive_type>PREEMPTIVE</preemptive_type>
+     <capacity>0</capacity>
+     <period>0</period>
+     <priority>0</priority>
+     <start_time>0</start_time>
+    </scheduling_parameters>
+   </scheduling>
+   <mils_confidentiality_level>TOP_SECRET</mils_confidentiality_level>
+   <mils_integrity_level>HIGH</mils_integrity_level>
+   <mils_component>SLS</mils_component>
+   <mils_partition>DEVICE</mils_partition>
+   <mils_compliant>TRUE</mils_compliant>
+  </address_space>
+[/if]
+[/for]
+[/for]
+ </address_spaces>
+[/if]
+[/for]
+
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Sw_Architecture'))]
+ <tasks>
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+  <periodic_task id="id_[c.name/]">
+   <object_type>TASK_OBJECT_TYPE</object_type>
+   <name>[c.name/]</name>
+   <task_type>[c.getValue(str,'type').oclAsType(EnumerationLiteral).name.toUpper()/]_TYPE</task_type>
+   <cpu_name>[c.getValue(str,'alloc')/]</cpu_name>
+   <address_space_name>adress_[c.getValue(str,'alloc')/]</address_space_name>
+   <capacity>[c.getValue(str,'wcet').oclAsType(Real).round()/]</capacity>
+   <energy_consumption>0</energy_consumption>
+   <deadline>[c.getValue(str,'deadline')/]</deadline>
+   <start_time>[c.getValue(str,'startTime')/]</start_time>
+   <priority>[c.getValue(str,'priority')/]</priority>
+   <blocking_time>0</blocking_time>
+   <policy>SCHED_FIFO</policy>
+   <text_memory_size>0</text_memory_size>
+   <text_memory_start_address>0</text_memory_start_address>
+   <stack_memory_size>0</stack_memory_size>
+   <criticality>0</criticality>
+   <context_switch_overhead>0</context_switch_overhead>
+   <cfg_relocatable>FALSE</cfg_relocatable>
+   <mils_confidentiality_level>TOP_SECRET</mils_confidentiality_level>
+   <mils_integrity_level>HIGH</mils_integrity_level>
+   <mils_component>SLS</mils_component>
+   <mils_task>APPLICATION</mils_task>
+   <mils_compliant>TRUE</mils_compliant>
+   <access_memory_number>0</access_memory_number>
+   <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
+   <period>[c.getValue(str,'period')/]</period>
+   <jitter>[c.getValue(str,'jitter')/]</jitter>
+   <every>0</every>
+  </periodic_task>
+[/for]
+[/for]
+ </tasks>
+[/if]
+[/for]
+[/for]
+</cheddar>
+[/file]
+[/template]
