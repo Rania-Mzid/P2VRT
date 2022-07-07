@@ -40,16 +40,16 @@ An example of an architecture model for the cruise control application is provid
 ### Step 2 - Consistency Check
 
 1. Create a new Acceleo project.
-2. Copy the code of the downloaded file named "PatternName_transToConsistency" in the created Acceleo project and run it.
+2. Copy the code of the downloaded file named "PatternName_transToAnalysisToolName" in the "generate.mtl" file of the Acceleo project and run it.
 3. Run the result file named "PatternName_verifConsistensy" of this transformation with a Java compilater to be able to answer the following question.
 
 > **_NOTE:_**
-> A folder named "gen-src" will be added in the new project folder, the designer must select this folder when generating the files with Acceleo.
+> A folder named "gen-src" will be added in the new project folder, the designer must select this folder when generating the files with Acceleo.\nThe designer can use the same Acceleo project created in all the following steps.
 
 ### Step 3 - Schedulability Check
 
-1. Create a new Acceleo Project.
-2. Copy the code of the downloaded file named "PatternName_transToAnalysisToolName" in the created Acceleo project and run it.
+1. Open the created Acceleo project.
+2. Copy the code of the downloaded file named "PatternName_transToAnalysisToolName" in the "generate.mtl" file of the Acceleo project and run it.
 4. Analyze the result file named "PatternName_AnalysisToolName" of this transformation with the choosen tool to be able to answer the following question.
 
 > **_NOTE:_**
@@ -57,8 +57,8 @@ An example of an architecture model for the cruise control application is provid
 
 ### Step 4 - POSIX Code Generation
 
-1. Create a new Acceleo Project.
-2. Copy the code of the downloaded file named "PatternName_transToPosix" in the created Acceleo project and run it.
+1. Open the created Acceleo project.
+2. Copy the code of the downloaded file named "PatternName_transToPosix" in the "generate.mtl" file of the Acceleo project and run it.
 3. Run the result file named "PatternName_Posix" of this transformation with the chosen tool to be able to answer the following question.
 
 ### Location of the files to be downloaded
