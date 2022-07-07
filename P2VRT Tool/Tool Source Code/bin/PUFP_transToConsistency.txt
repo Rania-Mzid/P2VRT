@@ -1,0 +1,91 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[comment @main/]
+[file ('PUFP_verifConsistency.java',false)]
+[for (comp:Component | m.eContents(Component))]
+[for (str:Stereotype | comp.getAppliedStereotypes())]
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+/* ---------------------- Class Task ----------------------- */
+class Task{
+    private String name;
+	private double wcet;
+	private int period;
+	private String alloc;
+	public Task(String name, double wcet, int period, String alloc){
+	    this.name = name;
+		this.wcet = wcet;
+		this.period = period;
+		this.alloc = alloc;
+	}
+	public String getName() {return this.name;}
+	public double getWcet() {return this.wcet;}
+	public int getPeriod() {return this.period;}
+	public String getAlloc() {return this.alloc;}
+}
+/* -------------------- Class ComputationalModel -------------------- */
+public class ComputationalModel{
+	private ArrayList<Task> tasks = new ArrayList<>();
+	public ComputationalModel(){}
+	public ArrayList<Task> getTasks() {return this.tasks;}
+	public static void main(String ['[]'/]args){
+		ComputationalModel cc = new ComputationalModel();
+        // Verify Tasks //
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Sw_Architecture'))]
+		[for (c:Component | co.eContents(Component))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+		cc.tasks.add(new Task("[c.name/]",[c.getValue(str,'wcet')/],[c.getValue(str,'period')/],"[c.getValue(str,'alloc')/]"));
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+		boolean test = false;
+		boolean res = false;
+		for(int i = 0; i < cc.tasks.size(); i++) {
+		    Task t = cc.tasks.get(i);
+			String msg = "For the task "+t.getName()+" : ";
+		    if(t.getWcet()==0) {
+				msg = msg + "| wcet must be > 0 |";
+				test = true;
+			}
+			if(t.getPeriod()==0) {
+				msg = msg + "| period must be > 0 |";
+				test = true;
+            }
+			if(t.getAlloc()=="") {
+				msg = msg + "| alloc must not be empty |";
+				test = true;
+            } 
+            
+            if(test==true){ 
+                System.out.println(msg); 
+                res = true;
+            }
+            
+            test = false;
+        }
+
+		if(res == true){
+            System.out.println(""); 
+            System.out.println("Result : Your model is Inconsistent");
+        }else{
+            System.out.println("Result : Your model is Consistent"); 
+        }
+	}
+}
+[/for]
+[/for]
+[/file]
+[/template]

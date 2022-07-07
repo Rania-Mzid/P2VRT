@@ -1,0 +1,80 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[file ('RMIT_Mast.txt',false)]
+Model (
+   Model_Name  => [m.name/]);
+
+[for (comp:Component | m.eContents(Component))]
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Hw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+[if (str.name->includes('Processor'))]
+Processing_Resource (
+   Type                   => Fixed_Priority_Processor,
+   Name                   => [c.name/]);
+
+[/if]
+[/for]
+[/for]
+[/if]
+[if (co.name->includes('Sw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+Scheduling_Server (
+   Type                       => Regular,
+   Name                       => [c.name/]_task,
+   Server_Sched_Parameters    => 
+      ( Type         => Fixed_Priority_Policy,
+        The_Priority => [c.getValue(str,'priority')/],
+        Preassigned  => NO),
+   Scheduler                  => [c.getValue(str,'alloc')/]);
+
+Operation (
+   Type                       => Simple,
+   Name                       => [c.name/],
+   Worst_Case_Execution_Time  => [c.getValue(str,'wcet')/]);
+
+[/for]
+[/for]
+[/if]
+[if (co.name->includes('Sw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+Transaction (
+        Type    => Regular,
+        Name    => [c.name/]_trans,
+        External_Events => (
+                (Type   => Periodic,
+                 Name   => E1,
+                 Period => [c.getValue(str,'period')/])),
+        Internal_Events => (
+                (Type   => regular,
+                 name   => O1,
+                 Timing_Requirements => (
+                         Type             => Hard_Global_Deadline,
+                         Deadline         => [c.getValue(str,'deadline')/],
+                         Referenced_Event => E1))),
+        Event_Handlers => (
+                (Type               => Activity,
+                 Input_Event        => E1,
+                 Output_Event       => O1,
+                 Activity_Operation => [c.name/],
+                 Activity_Server    => [c.name/]_task)));
+
+[/for]
+[/for]
+[/if]
+[/for]
+[/for]
+[/file]
+[/template]

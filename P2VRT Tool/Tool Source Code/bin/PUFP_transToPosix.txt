@@ -1,0 +1,73 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[file ('PUFP_Posix.c',false)]
+#include <stdio.h>
+#include <pthread.h>
+#include <time.h>
+#include <unistd.h>
+#include <semaphore.h>
+
+struct timespec global;
+typedef struct Task { double wcet; struct timespec period; } tache;
+
+[for (comp:Component | m.eContents(Component))]
+[for (co:Component | comp.eContents(Component))]
+[if (co.name->includes('Sw_Architecture'))]
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+void* [c.name/]func(tache *task){	
+    tache tt = *task;
+    while(global.tv_sec + (int) tt.wcet <= tt.period.tv_sec){
+        sleep((int) tt.wcet);
+        global.tv_sec = global.tv_sec + (int) tt.wcet;
+        printf("[c.name/]  = %d \n",(int)global.tv_sec);
+    }
+}
+[/for]
+[/for]
+
+int main(void){
+[for (c:Component | co.eContents(Component))]
+	pthread_t [c.name/];
+[/for]
+	struct sched_param param;
+    pthread_attr_t attr;
+
+    clock_gettime(CLOCK_REALTIME, &global);
+    printf("Debut  = %d \n",(int)global.tv_sec);
+
+    /* -----------------------------Définition des taches----------------------------- */
+[for (c:Component | co.eContents(Component))]
+[for (str:Stereotype | c.getAppliedStereotypes())]
+    pthread_attr_setschedparam(&attr, &param);
+    tache [c.name/]_t; [c.name/]_t.wcet = [c.getValue(str,'wcet')/];
+    clock_gettime(CLOCK_REALTIME, &[c.name/]_t.period); 
+	[c.name/]_t.period.tv_sec = [c.name/]_t.period.tv_sec+(int)[c.getValue(str,'period')/];
+    pthread_create(&[c.name/], NULL, [c.name/]func, &[c.name/]_t);
+    /* ------------------------------------------------------------------------------- */
+[/for]
+[/for]
+
+    /* --------------------------------Lancer des taches------------------------------ */
+[for (c:Component | co.eContents(Component))]
+    pthread_join([c.name/], NULL);
+[/for]
+
+ 	pthread_attr_destroy(&attr);
+    return 0;
+}
+
+[/if]
+[/for]
+[/for]
+[/file]
+[/template]

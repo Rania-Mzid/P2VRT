@@ -1,0 +1,270 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[template public generateElement(m : Model)]
+[comment @main/]
+[file (m.name, false, 'UTF-8')]
+[generate_text_file(m)/]
+[/file]
+[/template]
+
+[template public generate_text_file(m : Model)]
+[comment @main/]
+[file ('FPPC_FPCT_verifConsistency.java',false)]
+[for (comp:Component | m.eContents(Component))]
+[for (str:Stereotype | comp.getAppliedStereotypes())]
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+/* ---------------------- Class Task ----------------------- */
+class Task{
+    private String name;
+	private double wcet;
+	private int jitter;
+	private int priority;
+	private int period;
+	private int deadline;
+	private String alloc;
+	public Task(String name, double wcet, int jitter, int priority, int period, int deadline, String alloc){
+	    this.name = name;
+		this.wcet = wcet;
+		this.jitter = jitter;
+		this.priority = priority;
+		this.period = period;
+		this.deadline = deadline;
+		this.alloc = alloc;
+	}
+	public String getName() {return this.name;}
+	public double getWcet() {return this.wcet;}
+	public int getJitter() {return this.jitter;}
+	public int getPriority() {return this.priority;}
+	public int getPeriod() {return this.period;}
+	public int getDeadline() {return this.deadline;}
+	public String getAlloc() {return this.alloc;}
+}
+/* ---------------------- Class Message ---------------------- */
+class Message{
+    private String name;
+	private int size;
+	private int priority;
+	private String alloc;
+	public Message(String name, int size, int priority, String alloc){
+	    this.name = name;
+		this.size = size;
+		this.priority = priority;
+		this.alloc = alloc;
+	}
+	public String getName() {return this.name;}
+	public int getSize() {return this.size;}
+	public int getPriority() {return this.priority;}
+	public String getAlloc() {return this.alloc;}
+}
+/* ---------------------- Class Processor ---------------------- */
+class Processor{
+    private String name;
+	private String noc;
+	public Processor(String name, String noc){
+	    this.name = name;
+		this.noc = noc;
+	}
+	public String getName() {return this.name;}
+	public String getNoc() {return this.noc;}
+}
+/* ---------------------- Class Network ---------------------- */
+class Network{
+    private String name;
+	private int throughput;
+	public Network(String name, int throughput){
+	    this.name = name;
+		this.throughput = throughput;
+	}
+	public String getName() {return this.name;}
+	public int getThroughput() {return this.throughput;}
+}
+/* -------------------- Class ComputationalModel -------------------- */
+public class ComputationalModel{
+    private int maxPriority;
+    private int minPriority;
+	private ArrayList<Task> tasks = new ArrayList<>();
+	private ArrayList<Message> messages = new ArrayList<>();
+	private ArrayList<Processor> processors = new ArrayList<>();
+	private ArrayList<Network> networks = new ArrayList<>();
+	public ComputationalModel(int max, int min){
+	    this.maxPriority = max;
+	    this.minPriority = min;
+	}
+	public ArrayList<Task> getTasks() {return this.tasks;}
+	public ArrayList<Message> getMesasages() {return this.messages;}
+	public ArrayList<Processor> getProcessors() {return this.processors;}
+	public ArrayList<Network> getNetworks() {return this.networks;}
+	public static void main(String ['[]'/]args){
+		ComputationalModel cc = new ComputationalModel([comp.getValue(str,'maxPriority')/],[comp.getValue(str,'minPriority')/]);
+		// Verify ComputationalModel //
+		boolean test = false;
+		boolean res = false;
+		String msg = "For the ComputationalModel : ";
+		if(cc.maxPriority==0) {
+			msg = msg + "| maxPriority must be > 0 |";
+			test = true;
+		}
+		if(cc.minPriority == 0) {
+			msg = msg + "| minPriority must be > 0 |";
+			test = true;
+        }
+        if(test==true){ 
+            System.out.println(msg); 
+            res = true;
+        }
+        test = false;
+        // Verify Tasks //
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Sw_Architecture'))]
+		[for (c:Component | co.eContents(Component))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+		cc.tasks.add(new Task("[c.name/]",[c.getValue(str,'wcet')/],[c.getValue(str,'jitter')/],[c.getValue(str,'priority')/],[c.getValue(str,'period')/],[c.getValue(str,'deadline')/],"[c.getValue(str,'alloc')/]"));
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+		for(int i = 0; i < cc.tasks.size(); i++) {
+		    Task t = cc.tasks.get(i);
+		    msg = "For the task "+t.getName()+" : ";
+		    if(t.getWcet()==0) {
+				msg = msg + "| wcet must be > 0 |";
+				test = true;
+			}
+			if(t.getPeriod()==0) {
+				msg = msg + "| period must be > 0 |";
+				test = true;
+            }
+			if(t.getPriority()==0) {
+				msg = msg + "| priority must be > 0 |";
+				test = true;
+            }
+            if(t.getDeadline()==0) {
+				msg = msg + "| deadline must be > 0 |";
+				test = true;
+            }
+			if(t.getAlloc()=="") {
+				msg = msg + "| alloc must not be empty |";
+				test = true;
+            } 
+            if(test==true){ 
+                System.out.println(msg); 
+                res = true;
+            }
+            test = false;
+        }
+        // Verify Messages //
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Sw_Architecture'))]
+		[for (c:Connector | co.eContents(Connector))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+        cc.messages.add(new Message("[c.name/]",[c.getValue(str,'size')/],[c.getValue(str,'priority')/],"[c.getValue(str,'alloc')/]"));
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+        for(int i = 0; i < cc.messages.size(); i++) {
+		    Message m = cc.messages.get(i);
+		    msg = "For the message "+m.getName()+" : ";
+		     if(m.getSize()==0) {
+				msg = msg + "| size must be > 0 |";
+				test = true;
+			}
+			if(m.getPriority()==0) {
+				msg = msg + "| priority must be > 0 |";
+				test = true;
+            }
+			if(m.getAlloc()=="") {
+				msg = msg + "| alloc must not be empty |";
+				test = true;
+            }
+            if(test==true){ 
+                System.out.println(msg); 
+                res = true;
+            }
+            test = false;
+        }
+        // Verify Networks //
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Hw_Architecture'))]
+		[for (c:Component | co.eContents(Component))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+		[if (str.name->includes('Network'))]
+        cc.networks.add(new Network("[c.name/]",[c.getValue(str,'throughput')/]));
+		[/if]
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+        for(int i = 0; i < cc.networks.size(); i++) {
+		    Network net = cc.networks.get(i);
+            if(net.getThroughput()==0) {
+                System.out.println("For the network "+net.getName()+" : | throughput must be > 0 |"); 
+                res = true;
+            }
+        }
+        // Verify Processors //
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Hw_Architecture'))]
+		[for (c:Component | co.eContents(Component))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+		[if (str.name->includes('Processor'))]
+		cc.processors.add(new Processor("[c.name/]","[c.getValue(str,'Noc')/]"));
+		[/if]
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+        for(int i = 0; i < cc.processors.size(); i++) {
+		    Processor proc = cc.processors.get(i);
+            if(proc.getNoc()=="") {
+                System.out.println("For the processor "+proc.getName()+" : | Noc must be non-empty |"); 
+                res = true;
+            }
+        }
+        // Verify OCL Constraints //
+		ArrayList<Task> ll = new ArrayList<>();
+		[for (co:Component | comp.eContents(Component))]
+		[if (co.name->includes('Sw_Architecture'))]
+		[for (c:Component | co.eContents(Component))]
+		[for (str:Stereotype | c.getAppliedStereotypes())]
+		[for (p:Port | c.eContents(Port))]
+		[if (p.name.size()=2 or (not p.name.endsWith('message') and not p.name.endsWith('out') and p.name.contains('message')) or p.name.startsWith('In'))]
+		ll.add(new Task("[c.name/]",[c.getValue(str,'wcet')/],[c.getValue(str,'jitter')/],[c.getValue(str,'priority')/],[c.getValue(str,'period')/],[c.getValue(str,'deadline')/],"[c.getValue(str,'alloc')/]"));
+		[/if]
+		[if (p.name.endsWith('out'))]
+		ll.add(new Task("[c.name/]",[c.getValue(str,'wcet')/],[c.getValue(str,'jitter')/],[c.getValue(str,'priority')/],[c.getValue(str,'period')/],[c.getValue(str,'deadline')/],"[c.getValue(str,'alloc')/]"));
+		for(int i = 1; i < ll.size(); i++) {
+		    Task t1 = ll.get(i-1);
+			Task t2 = ll.get(i);
+	        if(t1.getPriority() < t2.getPriority()) {
+	        	System.out.println("Priority not respected : "+t2.getName()+"("+t2.getPriority()+") > "+t1.getName()+"("+t1.getPriority()+")"); 
+	        	res = true;
+	        }else if(t1.getJitter() > t2.getJitter()) {
+	            System.out.println("Jitter not respected : "+t1.getName()+"("+t1.getJitter()+") > "+t2.getName()+"("+t2.getJitter()+")"); 
+	            res = true;
+	        }
+        }
+		ll.removeAll(ll);
+		[/if]
+		[/for]
+		[/for]
+		[/for]
+		[/if]
+		[/for]
+
+		if(res == true){
+            System.out.println(""); 
+            System.out.println("Result : Your model is Inconsistent");
+        }else{
+            System.out.println("Result : Your model is Consistent"); 
+        }
+	}
+}
+[/for]
+[/for]
+[/file]
+[/template]
