@@ -59,4 +59,4 @@ An example of an architecture model for the cruise control application is provid
 
 ### Location of the files to be downloaded
 
-- The "PatternName_transToConsistency", "PatternName_transToAnalysisToolName" and "PatternName_transToPosix" files will be found in a folder named "trans_models" under his/her new project folder.
+The "PatternName_transToConsistency", "PatternName_transToAnalysisToolName" and "PatternName_transToPosix" files will be found in a folder named "trans_models" under his/her new project folder.
