@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_fDDo8JMREeyI745em7w6iw" name="cruise_control" URI="">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_fGcUIJMREeyI745em7w6iw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_hOcicJMREeyI745em7w6iw" name="cruise_control" visibility="public">
+    <nestedClassifier xmi:type="uml:Component" xmi:id="_taIt8MYvEey1_dbvz1yJ_A" name="Sw_Architecture">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_IvJTUNavEeyOZrRH5qSZ0w">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_IvgfsNavEeyOZrRH5qSZ0w" role="_BoNiUNauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_IvgfsdavEeyOZrRH5qSZ0w" role="_CSvtENauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_MntgUNavEeyOZrRH5qSZ0w">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_MntgUdavEeyOZrRH5qSZ0w" role="_GTXC0NauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_MntgUtavEeyOZrRH5qSZ0w" role="_GrNiINauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_lrj_UNavEeyOZrRH5qSZ0w">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_lrkmYNavEeyOZrRH5qSZ0w" role="_E4GlwNauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_lrkmYdavEeyOZrRH5qSZ0w" role="_EZZQgNauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_RcPNANa0EeyOZrRH5qSZ0w">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_RcP0ENa0EeyOZrRH5qSZ0w" role="_CsoMsNauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_RcP0Eda0EeyOZrRH5qSZ0w" role="_FVS4ENauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_9dabYNblEeyOZrRH5qSZ0w">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_9dcQkNblEeyOZrRH5qSZ0w" role="_IQzm8NauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_9dcQkdblEeyOZrRH5qSZ0w" role="_HK0PQNauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_LpNT0NxZEeyV3vZt1yD2sw">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_LpTacNxZEeyV3vZt1yD2sw" role="_F8HAcNauEeyOZrRH5qSZ0w"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_LpUBgNxZEeyV3vZt1yD2sw" role="_EBwzoNauEeyOZrRH5qSZ0w"/>
+      </ownedConnector>
+      <packagedElement xmi:type="uml:Component" xmi:id="_b6DT4NatEeyOZrRH5qSZ0w" name="input_acquisition">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_BoNiUNauEeyOZrRH5qSZ0w" name="In_e1" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_cP0vkNatEeyOZrRH5qSZ0w" name="input_interpretation">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_CSvtENauEeyOZrRH5qSZ0w" name="e1" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_CsoMsNauEeyOZrRH5qSZ0w" name="e1_acquisition_message" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_eTjh4NatEeyOZrRH5qSZ0w" name="speed_setpoint">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_E4GlwNauEeyOZrRH5qSZ0w" name="e2_e3" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_FVS4ENauEeyOZrRH5qSZ0w" name="acquisition_message_e2" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_eycdUNatEeyOZrRH5qSZ0w" name="application_condition">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_EBwzoNauEeyOZrRH5qSZ0w" name="e3_e4" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_EZZQgNauEeyOZrRH5qSZ0w" name="e3" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_fsttMNatEeyOZrRH5qSZ0w" name="basic_function">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_F8HAcNauEeyOZrRH5qSZ0w" name="e4" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_GTXC0NauEeyOZrRH5qSZ0w" name="e4_e5" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_gEn24NatEeyOZrRH5qSZ0w" name="controller">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_GrNiINauEeyOZrRH5qSZ0w" name="e5_out" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_hEZR0NatEeyOZrRH5qSZ0w" name="diagnosis">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_HK0PQNauEeyOZrRH5qSZ0w" name="In_diagnosis_message" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_huCEsNatEeyOZrRH5qSZ0w" name="limp_home">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_IQzm8NauEeyOZrRH5qSZ0w" name="diagnosis_message_out" aggregation="composite"/>
+      </packagedElement>
+    </nestedClassifier>
+    <packagedElement xmi:type="uml:Component" xmi:id="_vIRqwMYvEey1_dbvz1yJ_A" name="Hw_Architecture">
+      <packagedElement xmi:type="uml:Component" xmi:id="_7pNbwMYvEey1_dbvz1yJ_A" name="body_controller"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_8EBIcMYvEey1_dbvz1yJ_A" name="engine_management"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_8X2DYMYvEey1_dbvz1yJ_A" name="can_bus"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
