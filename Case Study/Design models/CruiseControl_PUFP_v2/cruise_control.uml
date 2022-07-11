@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PUFP.PUFP_Profile="http:///PUFP/PUFP_Profile.ecore" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///PUFP/PUFP_Profile.ecore PUFP.profile.uml#_03apgfoREeyR5Y5x_WeZkA">
+  <uml:Model xmi:id="_fDDo8JMREeyI745em7w6iw" name="cruise_control" URI="">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_fGcUIJMREeyI745em7w6iw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_hOcicJMREeyI745em7w6iw" name="cruise_control" visibility="public">
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_taIt8MYvEey1_dbvz1yJ_A" name="Sw_Architecture">
+        <packagedElement xmi:type="uml:Component" xmi:id="_b6DT4NatEeyOZrRH5qSZ0w" name="input_acquisition"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_cP0vkNatEeyOZrRH5qSZ0w" name="input_interpretation"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_eTjh4NatEeyOZrRH5qSZ0w" name="speed_setpoint"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_eycdUNatEeyOZrRH5qSZ0w" name="application_condition"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_fsttMNatEeyOZrRH5qSZ0w" name="basic_function"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_gEn24NatEeyOZrRH5qSZ0w" name="controller"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_hEZR0NatEeyOZrRH5qSZ0w" name="diagnosis"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_huCEsNatEeyOZrRH5qSZ0w" name="limp_home"/>
+      </nestedClassifier>
+      <packagedElement xmi:type="uml:Component" xmi:id="_vIRqwMYvEey1_dbvz1yJ_A" name="Hw_Architecture">
+        <packagedElement xmi:type="uml:Component" xmi:id="_7pNbwMYvEey1_dbvz1yJ_A" name="body_controller"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_8EBIcMYvEey1_dbvz1yJ_A" name="engine_management"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_8X2DYMYvEey1_dbvz1yJ_A" name="can_bus"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ewp3wP10Eey3NJh8toCEmw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ewrF4P10Eey3NJh8toCEmw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="PUFP.profile.uml#_03apgPoREeyR5Y5x_WeZkA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="PUFP.profile.uml#_-i7ywPn0EeyqVbt8viAdig"/>
+    </profileApplication>
+  </uml:Model>
+  <PUFP.PUFP_Profile:ComputationalModel xmi:id="_fnmG0P10Eey3NJh8toCEmw" base_Component="_hOcicJMREeyI745em7w6iw"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_gOfHsP10Eey3NJh8toCEmw" wcet="2.0" period="10" base_Component="_b6DT4NatEeyOZrRH5qSZ0w" alloc="body_controller"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_g_twUP10Eey3NJh8toCEmw" wcet="3.0" period="10" base_Component="_cP0vkNatEeyOZrRH5qSZ0w" alloc="body_controller"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_ht66IP10Eey3NJh8toCEmw" wcet="4.0" period="10" base_Component="_eTjh4NatEeyOZrRH5qSZ0w" alloc="engine_management"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_iXIPMP10Eey3NJh8toCEmw" wcet="2.0" period="10" base_Component="_hEZR0NatEeyOZrRH5qSZ0w" alloc="body_controller"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_i9sf8P10Eey3NJh8toCEmw" wcet="2.0" period="10" base_Component="_huCEsNatEeyOZrRH5qSZ0w" alloc="engine_management"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_jp764P10Eey3NJh8toCEmw" wcet="4.0" period="20" base_Component="_eycdUNatEeyOZrRH5qSZ0w" alloc="engine_management"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_kXe9YP10Eey3NJh8toCEmw" wcet="3.0" period="40" base_Component="_fsttMNatEeyOZrRH5qSZ0w" alloc="engine_management"/>
+  <PUFP.PUFP_Profile:Task xmi:id="_lEX4kP10Eey3NJh8toCEmw" wcet="3.0" period="40" base_Component="_gEn24NatEeyOZrRH5qSZ0w" alloc="engine_management"/>
+  <PUFP.PUFP_Profile:Processor xmi:id="_l7kmUP10Eey3NJh8toCEmw" base_Component="_8EBIcMYvEey1_dbvz1yJ_A"/>
+  <PUFP.PUFP_Profile:Processor xmi:id="_mlPOYP10Eey3NJh8toCEmw" base_Component="_7pNbwMYvEey1_dbvz1yJ_A"/>
+</xmi:XMI>
