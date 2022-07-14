@@ -1,6 +1,6 @@
 # P2VRT - Pattern-Driven Verication Process Tool
 
-P2VRT is a guidance tool aimed at helping desigers through the verification phase of their systems in order to meet real-time requirements. Real-Time verification design patterns are the focus of this tool. Currently, [more than 20 design patterns are available](https://github.com/Rania-Mzid/P2VRT/tree/main/Patterns%20repository).
+P2VRT is a tool that guides designers through the verification phase of their systems to ensure that they meet real-time requirements. Real-Time verification design patterns are the focus of this tool. Currently, [more than 20 design patterns are available](https://github.com/Rania-Mzid/P2VRT/tree/main/Patterns%20repository).
 
 ## Required Tools
 
