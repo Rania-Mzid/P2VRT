@@ -14,6 +14,7 @@ Model (
    Model_Name  => [m.name/]);
 
 [for (comp:Component | m.eContents(Component))]
+[for (st:Stereotype | comp.getAppliedStereotypes())]
 [for (co:Component | comp.eContents(Component))]
 [if (co.name->includes('Hw_Architecture'))]
 [for (c:Component | co.eContents(Component))]
@@ -35,7 +36,12 @@ Scheduling_Server (
    Name                       => [c.name/]_task,
    Server_Sched_Parameters    => 
       ( Type         => Fixed_Priority_Policy,
-        The_Priority => [c.getValue(str,'priority')/],
+		[if (comp.getValue(st,'maxPriority').oclAsType(Integer) > comp.getValue(st,'minPriority').oclAsType(Integer))]
+		The_Priority			=> [c.getValue(str,'priority')/],
+		[/if]
+		[if (comp.getValue(st,'maxPriority').oclAsType(Integer) < comp.getValue(st,'minPriority').oclAsType(Integer))]
+		The_Priority			=> [comp.getValue(st,'minPriority').oclAsType(Integer)-c.getValue(str,'priority').oclAsType(Integer)+1/],
+		[/if]
         Preassigned  => NO),
    Scheduler                  => [c.getValue(str,'alloc')/]);
 
@@ -74,6 +80,7 @@ Transaction (
 [/for]
 [/for]
 [/if]
+[/for]
 [/for]
 [/for]
 [/file]
