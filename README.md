@@ -67,7 +67,7 @@ The "PatternName_transToConsistency", "PatternName_transToAnalysisToolName", "Pa
 
 ## P2VRT tool demonstration 
 
-[Watch the demo on YouTube](https://youtu.be/tbmYItZkwiQ)
+[Watch the demo of the P2VRT Tool](https://youtu.be/tbmYItZkwiQ)
 
 
 
